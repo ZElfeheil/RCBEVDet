@@ -47,6 +47,8 @@ Key changes:
 - **`tools/data_converter/truckscenes_converter.py`** — Converts TruckScenes metadata to `.pkl` info files
 - **`configs/rcbevdet/truckscenes_rcbevdet_config.py`** — TruckScenes-specific config (2 cameras, 6 radars)
 
+**🔍 [Detailed Modifications Reference](docs/TRUCKSCENES_MODIFICATIONS.md)** — Full breakdown of every file changed with diffs, rationale, and radar data format comparison.
+
 ---
 
 ## Getting Started
