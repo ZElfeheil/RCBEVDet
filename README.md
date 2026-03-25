@@ -1,6 +1,6 @@
-# RCBEVDet
+# RCBEVDet — MAN TruckScenes Adaptation
 
-This is the official implementation of CVPR2024 paper: [**RCBEVDet: Radar-camera Fusion in Bird's Eye View for 3D Object Detection**](https://arxiv.org/abs/2403.16440) and its extended version RCBEVDet++.
+This repository adapts [**RCBEVDet**](https://arxiv.org/abs/2403.16440) (CVPR 2024) to run on the [**MAN TruckScenes**](https://brandportal.man/d/QSf8mPdU5Hgj/downloads#/-/dataset) dataset. The original paper is: *RCBEVDet: Radar-camera Fusion in Bird's Eye View for 3D Object Detection* and its extended version RCBEVDet++.
 
 ## Introduction
 
@@ -38,7 +38,7 @@ We present RCBEVDet, a radar-camera fusion 3D object detection method in the bir
 
 ## 🚛 TruckScenes Adaptation
 
-This fork adapts RCBEVDet for the [MAN TruckScenes](https://www.2024.man-truckscenes.com/) dataset.
+This fork adapts RCBEVDet for the [MAN TruckScenes](https://brandportal.man/d/QSf8mPdU5Hgj/downloads#/-/dataset) dataset.
 
 **📖 [Google Colab Setup Guide](docs/COLAB_SETUP_GUIDE.md)** — Full step-by-step instructions for running inference on TruckScenes using Google Colab.
 
@@ -117,30 +117,35 @@ python setup.py build install
 6. Install other dependencies of detectron2 and install [detectron2](https://github.com/facebookresearch/detectron2);
 
 
-### data preparetion
-If your folder structure is different from the following, you may need to change the 
-corresponding paths in config files.
+### data preparation
+
+The MAN TruckScenes dataset can be downloaded from the [MAN Brand Portal](https://brandportal.man/d/QSf8mPdU5Hgj/downloads#/-/dataset).
+
+TruckScenes follows the same folder structure as nuScenes. Your data directory should look like this:
 
 ```
 ├── mmdet3d
 ├── tools
 ├── configs
 ├── data
-│   ├── nuscenes
+│   ├── MAN-Truckscenes
 │   │   ├── maps
-│   │   │   ├── basemap
-│   │   │   ├── expansion
-│   │   │   ├── prediction
-│   │   │   ├── *.png
 │   │   ├── samples
 │   │   ├── sweeps
-│   │   ├── v1.0-test
-|   |   ├── v1.0-trainval
+│   │   ├── v1.0-mini          # or v1.0-trainval / v1.1-mini
 ```
 
-For RCBEVDet, prepare nuscenes data by running
+For **nuScenes** (original), prepare data by running:
 ```bash
 python tools/create_data_nuscenes_RC.py
+```
+
+For **TruckScenes**, convert the dataset metadata to `.pkl` info files:
+```bash
+python tools/data_converter/truckscenes_converter.py \
+  --root /path/to/MAN-Truckscenes \
+  --version v1.1-mini \
+  --out /path/to/output
 ```
 
 
